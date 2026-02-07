@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Vahali ❤️</title>
+    <style>
+        :root {
+            --deep-red: #800f2f;
+            --rose-pink: #ff4d6d;
+            --soft-cream: #fff0f3;
+            --gold: #c0a080;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+        }
+
+        body {
+            background: radial-gradient(circle, #590d22 0%, #000000 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--soft-cream);
+            overflow-x: hidden;
+        }
+
+        /* Floating Rose Petals Effect */
+        #canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .main-card {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 600px;
+            background: rgba(89, 13, 34, 0.4);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 77, 109, 0.3);
+            border-radius: 40px;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(255, 77, 109, 0.2);
+            animation: slideUp 1.2s ease-out;
+        }
+
+        .greeting {
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--rose-pink);
+            margin-bottom: 0.5rem;
+        }
+
+        .vahali-name {
+            font-size: 3rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 10px rgba(255, 77, 109, 0.5);
+            margin-bottom: 1.5rem;
+        }
+
+        .content-box {
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .day-badge {
+            background: var(--rose-pink);
+            padding: 5px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .special-emoji {
+            font-size: 5rem;
+            filter: drop-shadow(0 0 10px var(--rose-pink));
+            margin-bottom: 1rem;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .quote-box {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .sub-quote {
+            font-size: 0.95rem;
+            font-style: italic;
+            color: var(--gold);
+            margin-top: 10px;
+        }
+
+        .action-btn {
+            background: transparent;
+            border: 2px solid var(--rose-pink);
+            color: var(--rose-pink);
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .action-btn:hover {
+            background: var(--rose-pink);
+            color: white;
+            box-shadow: 0 0 20px var(--rose-pink);
+        }
+
+        .timer-footer {
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 1.5rem;
+            font-size: 0.85rem;
+        }
+
+        .dev-credit {
+            margin-top: 10px;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 480px) {
+            .vahali-name { font-size: 2.2rem; }
+            .quote-box { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="heart-bg" id="heart-bg"></div>
+
+    <div class="main-card">
+        <div class="greeting">My Dearest</div>
+        <div class="vahali-name">Vahali ❤️</div>
+        
+        <div class="content-box" id="content-area">
+            </div>
+
+        <button class="action-btn" onclick="showerLove()">Press for Love</button>
+
+        <div class="timer-footer">
+            <div id="live-time"></div>
+            <div class="dev-credit">Maintained and Developed by Akhil Patel</div>
+        </div>
+    </div>
+
+    <script>
+        const weekData = {
+            7: { 
+                name: "Rose Day", 
+                emoji: "🌹", 
+                wish: "A single rose can be my garden... a single friend, my world. But you are my entire universe.",
+                quote: "You're more beautiful than a thousand roses in full bloom."
+            },
+            8: { 
+                name: "Propose Day", 
+                emoji: "💍", 
+                wish: "I don't need a thousand reasons to love you. I just need you. Today and forever.",
+                quote: "In a room full of art, I'd still stare at you."
+            },
+            9: { 
+                name: "Chocolate Day", 
+                emoji: "🍫", 
+                wish: "Life is like a box of chocolates, but having you makes it the sweetest box ever!",
+                quote: "Your sweetness is my favorite addiction."
+            },
+            10: { 
+                name: "Teddy Day", 
+                emoji: "🧸", 
+                wish: "Sending you a virtual hug that's as soft as a teddy and as warm as my love for you.",
+                quote: "You're my forever cuddle partner."
+            },
+            11: { 
+                name: "Promise Day", 
+                emoji: "🤝", 
+                wish: "I promise to be your strength when you are weak and your laughter when you are sad.",
+                quote: "My promise is a 'forever' kind of deal."
+            },
+            12: { 
+                name: "Hug Day", 
+                emoji: "🫂", 
+                wish: "Sometimes a hug is worth more than a thousand words. Here is a big one for you!",
+                quote: "Your arms feel more like home than any house ever did."
+            },
+            13: { 
+                name: "Kiss Day", 
+                emoji: "💋", 
+                wish: "A kiss is a lovely trick designed by nature to stop speech when words become superfluous.",
+                quote: "One kiss from you and I'm in another world."
+            },
+            14: { 
+                name: "Valentine's Day", 
+                emoji: "💝", 
+                wish: "You are my heart, my life, and my one and only thought. Happy Valentine's Day, Vahali!",
+                quote: "Whatever our souls are made of, yours and mine are the same."
+            }
+        };
+
+        function renderDay() {
+            const now = new Date();
+            const date = now.getDate();
+            const month = now.getMonth() + 1;
+            const content = document.getElementById('content-area');
+
+            if (month === 2 && weekData[date]) {
+                const today = weekData[date];
+                content.innerHTML = `
+                    <div class="day-badge">${today.name}</div>
+                    <div class="special-emoji">${today.emoji}</div>
+                    <div class="quote-box">"${today.wish}"</div>
+                    <div class="sub-quote">— ${today.quote}</div>
+                `;
+            } else {
+                content.innerHTML = `
+                    <div class="special-emoji">✨</div>
+                    <div class="quote-box">"Every day is a celebration of love when I have you by my side."</div>
+                    <div class="sub-quote">— Waiting for our special week</div>
+                `;
+            }
+        }
+
+        function showerLove() {
+            for(let i=0; i<15; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = ['❤️', '🌹', '💖', '✨'][Math.floor(Math.random() * 4)];
+            heart.style.position = 'fixed';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '100vh';
+            heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+            heart.style.zIndex = '100';
+            heart.style.pointerEvents = 'none';
+            heart.style.transition = 'transform 4s linear, opacity 4s';
+            
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.style.transform = `translateY(-110vh) translateX(${(Math.random() - 0.5) * 100}px) rotate(${Math.random() * 360}deg)`;
+                heart.style.opacity = '0';
+            }, 100);
+
+            setTimeout(() => heart.remove(), 4000);
+        }
+
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('live-time').innerText = now.toLocaleString();
+        }
+
+        setInterval(updateTime, 1000);
+        setInterval(createHeart, 800);
+        renderDay();
+        updateTime();
+    </script>
+</body>
+</html>
